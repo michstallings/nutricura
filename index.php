@@ -2,7 +2,7 @@
 /**
  * Index
  *
- * @package Page Builder Framework
+ * @package Nutricura - Page Builder Framework
  */
  
 // exit if accessed directly
