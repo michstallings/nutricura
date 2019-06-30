@@ -146,6 +146,7 @@ add_action( 'wp_enqueue_scripts', 'wpbf_scripts', 10 );
 
 // Init
 require_once( WPBF_THEME_DIR . '/inc/init.php' );
+}
 
 //Widgets
 //Left footer widget
