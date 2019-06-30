@@ -7,7 +7,7 @@
  */
  
 // exit if accessed directly
-/*if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 		do_action( 'wpbf_before_footer' );
 
@@ -19,7 +19,7 @@
 
 	</div> 
 
-<?php do_action( 'wpbf_body_close' ); ?> */ ?>
+<?php do_action( 'wpbf_body_close' ); ?> 
 
 <footer>
 		<div class="container" id="footer">
