@@ -1,28 +1,35 @@
 <?php
 /**
- * Theme Footer
- * See also inc/template-parts/footer.php
+ * The template for displaying the footer.
  *
- * @package Page Builder Framework
+ * Contains the closing of the #content div and all content after.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
-		do_action( 'wpbf_before_footer' );
+?>
+			<?php astra_content_bottom(); ?>
 
-		if ( get_theme_mod( 'footer_layout' ) !== 'none' ) do_action( 'wpbf_footer' );
+			</div> <!-- ast-container -->
 
-		do_action( 'wpbf_after_footer' );
+		</div><!-- #content -->
 
-		?>
+		<?php astra_content_after(); ?>
 
-	</div>
+		<?php astra_footer_before(); ?>
 
-<?php do_action( 'wpbf_body_close' ); ?>
+		<?php astra_footer(); ?>
 
-<?php wp_footer(); ?>
+		<?php astra_footer_after(); ?>
 
-</body>
+	</div><!-- #page -->
 
+	<?php astra_body_bottom(); ?>
+
+	<?php wp_footer(); ?>
+
+	</body>
 </html>

@@ -1,35 +1,45 @@
 <?php
 /**
- * Theme Header
+ * The header for Astra Theme.
  *
- * @package Nutricura - Page Builder Framework
+ * This is the template that displays all of the <head> section and everything up until <div id="content">
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?><!DOCTYPE html>
-
+<?php astra_html_before(); ?>
 <html <?php language_attributes(); ?>>
-
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
+<?php astra_head_top(); ?>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+
+<?php wp_head(); ?>
+<?php astra_head_bottom(); ?>
 </head>
 
-<body <?php body_class(); ?> <?php wpbf_body_schema_markup(); ?>>
-	<a class="screen-reader-text skip-link" href="#content" title="<?php echo esc_attr__( 'Skip to content', 'page-builder-framework' ); ?>"><?php _e( 'Skip to content', 'page-builder-framework' ); // WPCS: XSS ok. ?></a>
+<body <?php astra_schema_body(); ?> <?php body_class(); ?>>
 
-	<?php do_action( 'wp_body_open' ); ?>
+<?php astra_body_top(); ?>
+<?php wp_body_open(); ?>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content"><?php echo esc_html( astra_default_strings( 'string-header-skip-link', false ) ); ?></a>
 
-	<?php do_action( 'wpbf_body_open' ); ?>
+	<?php astra_header_before(); ?>
 
-	<div id="container" class="hfeed wpbf-page">
+	<?php astra_header(); ?>
 
-		<?php do_action( 'wpbf_before_header' ); ?>
+	<?php astra_header_after(); ?>
 
-		<?php do_action('wpbf_header'); ?>
-		
-		<?php do_action( 'wpbf_after_header' ); ?>
+	<?php astra_content_before(); ?>
+
+	<div id="content" class="site-content">
+
+		<div class="ast-container">
+
+		<?php astra_content_top(); ?>

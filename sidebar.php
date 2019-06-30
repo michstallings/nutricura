@@ -1,42 +1,30 @@
 <?php
 /**
- * Sidebar
+ * The sidebar containing the main widget area.
  *
- * @package Page Builder Framework
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
-$sidebar = apply_filters( 'wpbf_do_sidebar', 'sidebar-1' );
+$sidebar = apply_filters( 'astra_get_sidebar', 'sidebar-1' );
 
 ?>
 
-	<div class="wpbf-medium-1-3 wpbf-sidebar-wrapper">
+<div itemtype="https://schema.org/WPSideBar" itemscope="itemscope" id="secondary" <?php astra_secondary_class(); ?> role="complementary">
 
-		<?php do_action( 'wpbf_before_sidebar' ); ?>
+	<div class="sidebar-main" <?php echo apply_filters( 'astra_sidebar_data_attrs', '', $sidebar ); ?>>
 
-		<aside id="sidebar" class="wpbf-sidebar" itemscope="itemscope" itemtype="https://schema.org/WPSideBar">
+		<?php astra_sidebars_before(); ?>
 
-		<?php do_action( 'wpbf_sidebar_open' ); ?>
+		<?php if ( is_active_sidebar( $sidebar ) ) : ?>
 
-		<?php if ( !dynamic_sidebar( $sidebar ) ) { ?>
+			<?php dynamic_sidebar( $sidebar ); ?>
 
-			<?php if( current_user_can( 'edit_theme_options' ) ) { ?>
+		<?php endif; ?>
 
-				<div class="widget no-widgets">
-					<?php _e( 'Your Sidebar Widgets will appear here.', 'page-builder-framework' ); // WPCS: XSS ok. ?><br>
-					<a href='<?php echo esc_url( admin_url( 'widgets.php' ) ); ?>'><?php _e( 'Add Widgets', 'page-builder-framework' ); // WPCS: XSS ok. ?></a>
-				</div>
+		<?php astra_sidebars_after(); ?>
 
-			<?php } ?>
-
-		<?php } ?>
-
-		<?php do_action( 'wpbf_sidebar_close' ); ?>
-
-		</aside>
-		
-		<?php do_action( 'wpbf_after_sidebar' ); ?>
-
-	</div>
+	</div><!-- .sidebar-main -->
+</div><!-- #secondary -->

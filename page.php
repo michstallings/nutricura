@@ -1,58 +1,40 @@
 <?php
 /**
- * Page Template
+ * The template for displaying all pages.
  *
- * @package Page Builder Framework
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site may use a
+ * different template.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header(); ?>
 
-		<div id="content">
+<?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
 
-			<?php do_action( 'wpbf_content_open' ); ?>
-			
-			<?php wpbf_inner_content(); ?>
+	<?php get_sidebar(); ?>
 
-				<?php do_action( 'wpbf_inner_content_open' ); ?>
+<?php endif ?>
 
-				<main id="main" class="wpbf-main<?php echo wpbf_singular_class(); // WPCS: XSS ok. ?>">
+	<div id="primary" <?php astra_primary_class(); ?>>
 
-					<?php do_action( 'wpbf_main_content_open' ); ?>
+		<?php astra_primary_content_top(); ?>
 
-					<?php wpbf_title(); ?>
+		<?php astra_content_page_loop(); ?>
 
-					<?php if( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+		<?php astra_primary_content_bottom(); ?>
 
-					<div class="entry-content" itemprop="text">
+	</div><!-- #primary -->
 
-						<?php the_content(); ?>
+<?php if ( astra_page_layout() == 'right-sidebar' ) : ?>
 
-						<?php
-						wp_link_pages( array(
-							'before' => '<div class="page-links">' . __( 'Pages:', 'page-builder-framework' ),
-							'after'  => '</div>',
-						) );
-						?>
+	<?php get_sidebar(); ?>
 
-					</div>
+<?php endif ?>
 
-					<?php endwhile; endif; ?>
-
-					<?php comments_template(); ?>
-
-					<?php do_action( 'wpbf_main_content_close' ); ?>
-
-				</main>
-
-				<?php do_action( 'wpbf_inner_content_close' ); ?>
-
-			<?php wpbf_inner_content_close(); ?>
-
-			<?php do_action( 'wpbf_content_close' ); ?>
-			
-		</div>
-	    
 <?php get_footer(); ?>

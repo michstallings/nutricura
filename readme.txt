@@ -1,58 +1,73 @@
 -------------------------------------------------------
-Page Builder Framework – The only theme you'll ever need
+Welcome to ASTRA!
 -------------------------------------------------------
-Website: https://wp-pagebuilderframework.com
-Documentation: https://wp-pagebuilderframework.com/docs/
-Premium Add-On: https://wp-pagebuilderframework.com/premium/
-Email: support@wp-pagebuilderframework.com
+Website: https://wpastra.com/
+Email: support@bsf.io
 
 -------------------------------------------------------
 Features:
 -------------------------------------------------------
+
+== Appearance > Widgets ==
+Astra has up to 4 widget area. 1 in your header, 1 for each sidebar and up to 2 in your footer.
+
 == Appearance > Customize ==
-	- General: change the layout, background, sidebar, accent- & button colors for your website.
-	- Blog: customize the look & layout of your blog and archive pages.
-	- Typography: pick your favorite fonts and adjust the typography for your headlines and text.
-	- Header: from here you can change your logo, the look of the navigation, mobile navigation and activate your pre-header.
-	- Footer: take control over the footer of your website. Adjust colors, add menu's and change your text on the fly.
-	- Menus: select or change the menu's you'd like to display in certain areas of your website up to 2 levels deep.
-	- Widgets: set the widgets you would like to appear in the sidebar/s.
-	- Homepage Settings: make your front page display the latest blog posts or a static page.
-	- Additional CSS: apply custom styling to Page Builder Framework.
+	- Site Identity: Hide your site title or tagline, and upload your own header.
+	- Layout: Change things like your container width, header layout, Header width, Custom menu item , sidebar layout and much more.
+	- Set footer layout there is a two footer layout layout 1 and layout 2. layout 1 is stack style and layout 2 is inline.
+	- Blog: Show the full post or excerpt, also show and hide blog post meta & adjust blog post width to default or custom.
+	- Single post:Set single post meta and adjust width to custom or default.
+	- Colors & background: Choose your default background color, body color, theme color and link color.
+	- Typography: Choose your default body font & set default font size to H1 to H6 tags, Site title, tagline & blog post title on archive page and single page.
 
 -------------------------------------------------------
-Child Theme:
+ASTRA Child Theme
 -------------------------------------------------------
-Download the Page Builder Framework child theme or create your own – https://wp-pagebuilderframework.com/child-theme-generator/
+
+There are multiple ways you can use a child theme with the Astra Theme, Use any one method mentoned below to create a child theme or use a child theme we have created.
+
+1. Download the child theme from Github - https://github.com/brainstormforce/astra-child/releases/latest/
+2. Using Plugin One click Child theme - https://wordpress.org/plugins/one-click-child-theme/
+3. More information on creating child theme. - https://codex.wordpress.org/Child_Themes
 
 -------------------------------------------------------
-License
+ASTRA License
 -------------------------------------------------------
-Page Builder Framework WordPress Theme, Copyright 2017 wp-pagebuilderframework.com
+Astra WordPress Theme, Copyright 2018 WPAstra.
+Astra is distributed under the terms of the GNU GPL.
 
-Page Builder Framework is licensed under the GNU General Public License 3 or later
-More details here: https://www.gnu.org/licenses/gpl-3.0.html
-
--------------------------------------------------------
-Screenshot
--------------------------------------------------------
-Screenshot image is licensed under CC0 1.0 Universal - https://creativecommons.org/publicdomain/zero/1.0/
-Image: https://www.pexels.com/photo/woman-in-white-t-shirt-holding-smartphone-in-front-of-laptop-914931/
-Illustrations: Self Created
+Astra is based on Underscores https://underscores.me/, (C) 2012-2015 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
 
 -------------------------------------------------------
-WooCommerce
+Screenshot Licenses
 -------------------------------------------------------
-WooCommerce is licensed under the GNU General Public License v3 or later – https://www.gnu.org/licenses/gpl-3.0.html
+Screenshot images are all licensed under CC0 Universal
+https://www.pexels.com/photo/adult-business-woman-businessman-chairs-529923/
+https://www.pexels.com/photo/adult-beard-beverage-blur-551652/
+https://www.pexels.com/photo/whiteboard-sketching-design-planning-7366/
 
 -------------------------------------------------------
-kirki
+Normalizing styles
 -------------------------------------------------------
-kirki is licensed under the MIT License (MIT)
-created by Aristeides Stathopoulos – https://aristath.github.io/
+Normalizing styles have been helped along thanks to the fine work of.
+Nicolas Gallagher and Jonathan Neal https://necolas.github.com/normalize.css/
 
 -------------------------------------------------------
-normalize.css
+Flexibility JS
 -------------------------------------------------------
-normalize.css is licensed under the MIT License (MIT)
-created by Nicolas Gallagher and Jonathan Neal – https://github.com/necolas/normalize.css
+Flexibility is a JavaScript polyfill for Flexbox By Jonathan Neal, 10up. (https://github.com/jonathantneal/flexibility)
+Licensed under MIT ( https://github.com/jonathantneal/flexibility/blob/master/LICENSE.md )
+
+-------------------------------------------------------
+WP Color Picker Alpha
+-------------------------------------------------------
+WP Color Picker Alpha is used to Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker By Sergio. (https://github.com/kallookoo/wp-color-picker-alpha)
+Distributed under the terms of the GNU GPL v2.
+
+-------------------------------------------------------
+IcoMoon-Free
+-------------------------------------------------------
+Astra icon font is based on IcoMoon-Free vector icon by Keyamoon.
+IcoMoon-Free vector icon destributed under trems of CC BY 4.0 or GPL. (https://creativecommons.org/licenses/by/4.0/ or https://www.gnu.org/licenses/gpl.html)
+Source: https://keyamoon.com/

@@ -1,68 +1,95 @@
 <?php
 /**
- * Comments Template
+ * The template for displaying comments.
  *
- * @package Page Builder Framework
+ * This is the template that displays the area of the page that contains both the current comments
+ * and the comment form.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
-// don't load it if you can't comment
-if ( post_password_required() )	return;
-
+/*
+ * If the current post is protected by a password and
+ * the visitor has not yet entered the password we will
+ * return early without loading the comments.
+ */
+if ( post_password_required() ) {
+	return;
+}
 ?>
 
-<?php if ( have_comments() ) : ?>
+<div id="comments" class="comments-area">
 
-	<?php do_action( 'wpbf_before_comments' ); ?>
+	<?php astra_comments_before(); ?>
 
-	<section class="commentlist">
+	<?php if ( have_comments() ) : ?>
+		<div class="comments-count-wrapper">
+			<h3 class="comments-title">
+				<?php
+				$comments_title = apply_filters(
+					'astra_comment_form_title',
+					sprintf( // WPCS: XSS OK.
+						/* translators: 1: number of comments */
+						esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'astra' ) ),
+						number_format_i18n( get_comments_number() ),
+						get_the_title()
+					)
+				);
 
-		<h3 id="comments-title"><?php comments_number( __( '<span>No</span> Comments', 'page-builder-framework' ), __( '<span>One</span> Comment', 'page-builder-framework' ), __( '<span>%</span> Comments', 'page-builder-framework' ) );?></h3>
-
-		<ul class="comments">
-
-			<?php
-				wp_list_comments( array(
-					'avatar_size'	=>		80,
-					'callback'		=>		'wpbf_comments',
-					'reply_text'	=>		__( 'Reply', 'page-builder-framework' ),
-				) );
-			?>
-			
-		</ul>
+				echo esc_html( $comments_title );
+				?>
+			</h3>
+		</div>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-		<nav class="wpbf-comment-nav wpbf-clearfix" aria-label="<?php _e( 'Comments Navigation', 'page-builder-framework' ); ?>">
-			<span class="screen-reader-text"><?php _e( 'Comments Navigation', 'page-builder-framework' ) ?></span>
-			<div class="previous"><?php previous_comments_link( __( '&larr; Older Comments', 'page-builder-framework' ) ); ?></div>
-			<div class="next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'page-builder-framework' ) ); ?></div>
-		</nav>
+		<nav id="comment-nav-above" class="navigation comment-navigation" role="navigation" aria-label="<?php esc_html_e( 'Comments Navigation', 'astra' ); ?>">
+			<h3 class="screen-reader-text"><?php echo esc_html( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></h3>
+			<div class="nav-links">
+
+				<div class="nav-previous"><?php previous_comments_link( astra_default_strings( 'string-comment-navigation-previous', false ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></div>
+
+			</div><!-- .nav-links -->
+		</nav><!-- #comment-nav-above -->
 		<?php endif; ?>
 
-	</section>
+		<ol class="ast-comment-list">
+			<?php
+			wp_list_comments(
+				array(
+					'callback' => 'astra_theme_comment',
+					'style'    => 'ol',
+				)
+			);
+			?>
+		</ol><!-- .ast-comment-list -->
 
-	<?php if ( ! comments_open() ) : ?>
-	<p class="no-comments"><?php _e( 'Comments are closed.' , 'page-builder-framework' ); // WPCS: XSS ok. ?></p>
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
+		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation" aria-label="<?php esc_html_e( 'Comments Navigation', 'astra' ); ?>">
+			<h3 class="screen-reader-text"><?php echo esc_html( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></h3>
+			<div class="nav-links">
+
+				<div class="nav-previous"><?php previous_comments_link( astra_default_strings( 'string-comment-navigation-previous', false ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( astra_default_strings( 'string-comment-navigation-next', false ) ); ?></div>
+
+			</div><!-- .nav-links -->
+		</nav><!-- #comment-nav-below -->
+		<?php endif; ?>
+
 	<?php endif; ?>
 
-	<?php do_action( 'wpbf_after_comments' ); ?>
+	<?php
+		// If comments are closed and there are comments, let's leave a little note, shall we?
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
+		?>
+		<p class="no-comments"><?php echo esc_html( astra_default_strings( 'string-comment-closed', false ) ); ?></p>
+	<?php endif; ?>
 
-<?php endif; ?>
+	<?php comment_form(); ?>
 
-<?php
+	<?php astra_comments_after(); ?>
 
-$args = array(
-	'title_reply'          => apply_filters( 'wpbf_leave_comment', __( 'Leave a Comment', 'page-builder-framework' ) ),
-	/* translators: 1: comment title */
-	'title_reply_to'       => apply_filters( 'wpbf_leave_reply', __( 'Leave a Reply to %s', 'page-builder-framework' ) ),
-	'cancel_reply_link'    => apply_filters( 'wpbf_cancel_reply', __( 'Cancel Reply', 'page-builder-framework' ) ),
-	'label_submit'         => apply_filters( 'wpbf_post_comment', __( 'Post Comment', 'page-builder-framework' ) ),
-);
-
-do_action( 'wpbf_before_comment_form' );
-
-comment_form( $args );
-
-do_action( 'wpbf_after_comment_form' );
+</div><!-- #comments -->

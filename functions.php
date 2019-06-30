@@ -1,150 +1,140 @@
 <?php
 /**
- * Theme Functions
+ * Astra functions and definitions
  *
- * @package Page Builder Framework
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Constants
+ * Define Constants
  */
-define( 'WPBF_THEME_DIR', get_template_directory() );
-define( 'WPBF_THEME_URI', get_template_directory_uri() );
-define( 'WPBF_CHILD_THEME_DIR', get_stylesheet_directory() );
-define( 'WPBF_CHILD_THEME_URI', get_stylesheet_directory_uri() );
-define( 'WPBF_VERSION', wp_get_theme( 'page-builder-framework' )->get('Version') );
-define( 'WPBF_CHILD_VERSION', wp_get_theme( 'wpbf-child' )->get('Version') );
+define( 'ASTRA_THEME_VERSION', '1.8.7' );
+define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
+define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
+define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
 
 /**
- * Theme Setup
+ * Update theme
  */
-function wpbf_theme_setup() {
-
-	// Textdomain
-	load_theme_textdomain( 'page-builder-framework', get_template_directory() . '/languages' );
-
-	// Custom Logo
-	add_theme_support( 'custom-logo',
-		array(
-			'width'       => 180,
-			'height'      => 48,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
-
-	// Custom Background
-	add_theme_support( 'custom-background',
-		array(
-			'default-color'          => 'ffffff',
-			'default-image'          => '',
-			'default-repeat'         => 'repeat',
-			'default-position-x'     => 'left',
-			'default-position-y'     => 'top',
-			'default-size'           => 'auto',
-			'default-attachment'     => 'scroll',
-		)
-	);
-
-	// Title Tag
-	add_theme_support( 'title-tag' );
-
-	// Editor Styles
-	add_theme_support( 'editor-styles' );
-
-	// Post Thumbnails
-	add_theme_support( 'post-thumbnails' );
-
-	// Automatic Feed Links
-	add_theme_support( 'automatic-feed-links' );
-
-	// HTML5 Support
-	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'gallery', 'caption' ) );
-
-	// Selective Refresh for Widgets
-	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	// Nav Menu's
-	register_nav_menus( array(
-		'main_menu'             => __( 'Main Menu', 'page-builder-framework' ),
-		'mobile_menu'           => __( 'Mobile Menu', 'page-builder-framework' ),
-		'pre_header_menu'       => __( 'Pre Header Left', 'page-builder-framework' ),
-		'pre_header_menu_right'	=> __( 'Pre Header Right', 'page-builder-framework' ),
-		'footer_menu'           => __( 'Footer Left', 'page-builder-framework' ),
-		'footer_menu_right'     => __( 'Footer Right', 'page-builder-framework' )
-	) );
-
-}
-add_action( 'after_setup_theme', 'wpbf_theme_setup' );
+require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-theme-update.php';
+require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-pb-compatibility.php';
 
 /**
- * Content Width
+ * Load theme hooks
  */
-if ( ! isset( $content_width ) ) {
-	$content_width = 1200;
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-theme-options.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-theme-strings.php';
+
+/**
+ * Fonts Files
+ */
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-font-families.php';
+if ( is_admin() ) {
+	require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts-data.php';
+}
+
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts.php';
+
+require_once ASTRA_THEME_DIR . 'inc/core/common-functions.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-walker-page.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-enqueue-scripts.php';
+require_once ASTRA_THEME_DIR . 'inc/core/class-gutenberg-editor-css.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-dynamic-css.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-attr.php';
+require_once ASTRA_THEME_DIR . 'inc/template-tags.php';
+
+require_once ASTRA_THEME_DIR . 'inc/widgets.php';
+require_once ASTRA_THEME_DIR . 'inc/core/theme-hooks.php';
+require_once ASTRA_THEME_DIR . 'inc/admin-functions.php';
+require_once ASTRA_THEME_DIR . 'inc/core/sidebar-manager.php';
+
+/**
+ * Markup Functions
+ */
+require_once ASTRA_THEME_DIR . 'inc/extras.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/blog-config.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/blog.php';
+require_once ASTRA_THEME_DIR . 'inc/blog/single-blog.php';
+/**
+ * Markup Files
+ */
+require_once ASTRA_THEME_DIR . 'inc/template-parts.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-loop.php';
+require_once ASTRA_THEME_DIR . 'inc/class-astra-mobile-header.php';
+
+/**
+ * Functions and definitions.
+ */
+require_once ASTRA_THEME_DIR . 'inc/class-astra-after-setup-theme.php';
+
+// Required files.
+require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-helper.php';
+
+if ( is_admin() ) {
+
+	/**
+	 * Admin Menu Settings
+	 */
+	require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-settings.php';
+	require_once ASTRA_THEME_DIR . 'inc/lib/notices/class-astra-notices.php';
+
+	/**
+	 * Metabox additions.
+	 */
+	require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-boxes.php';
+}
+
+require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-box-operations.php';
+
+
+/**
+ * Customizer additions.
+ */
+require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-customizer.php';
+
+
+/**
+ * Compatibility
+ */
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-jetpack.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/woocommerce/class-astra-woocommerce.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/edd/class-astra-edd.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/lifterlms/class-astra-lifterlms.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/learndash/class-astra-learndash.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-beaver-builder.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-bb-ultimate-addon.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-contact-form-7.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-visual-composer.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-site-origin.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-gravity-forms.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-bne-flyout.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-ubermeu.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-divi-builder.php';
+require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-amp.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/transparent-header/class-astra-ext-transparent-header.php';
+require_once ASTRA_THEME_DIR . 'inc/addons/breadcrumbs/class-astra-breadcrumbs.php';
+
+// Elementor Compatibility requires PHP 5.4 for namespaces.
+if ( version_compare( PHP_VERSION, '5.4', '>=' ) ) {
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor.php';
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor-pro.php';
+}
+
+// Beaver Themer compatibility requires PHP 5.3 for anonymus functions.
+if ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
+	require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-beaver-themer.php';
 }
 
 /**
- * Sidebar
+ * Load deprecated functions
  */
-function wpbf_sidebars() {
-
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'page-builder-framework' ),
-		'id'            => 'sidebar-1',
-		'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="wpbf-widgettitle">',
-		'after_title'   => '</h4>'
-	) );
-
-}
-add_action( 'widgets_init', 'wpbf_sidebars' );
-
-/**
- * Scripts & Styles
- */
-function wpbf_scripts() {
-
-	// site.js
-	wp_enqueue_script( 'wpbf-site', get_template_directory_uri() . '/js/min/site-min.js', array( 'jquery' ), WPBF_VERSION, true );
-
-	// mobile menu js
-	if( ! get_theme_mod( 'mobile_menu_options' ) || get_theme_mod( 'mobile_menu_options' ) == 'menu-mobile-hamburger' ) {
-
-		// hamburger
-		wp_enqueue_script( 'wpbf-mobile-menu-hamburger', get_template_directory_uri() . '/js/min/mobile-hamburger-min.js', array( 'jquery', 'wpbf-site' ), WPBF_VERSION, true );		
-
-	} elseif( get_theme_mod( 'mobile_menu_options' ) == 'menu-mobile-default' ) {
-
-		// default
-		wp_enqueue_script( 'wpbf-mobile-menu-default', get_template_directory_uri() . '/js/min/mobile-default-min.js', array( 'jquery', 'wpbf-site' ), WPBF_VERSION, true );		
-
-	}
-
-	// style.css
-	wp_enqueue_style( 'wpbf-style', get_template_directory_uri() . '/style.css', '', WPBF_VERSION );
-
-	// responsive.css
-	wp_enqueue_style( 'wpbf-responsive', get_template_directory_uri() . '/css/min/responsive-min.css', '', WPBF_VERSION );
-
-	// comment reply
-	if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
-
-	// rtl
-	if ( is_rtl() ) {
-
-		wp_enqueue_style( 'wpbf-rtl', get_template_directory_uri() . '/css/min/rtl-min.css', '', WPBF_VERSION );
-
-	}
-
-}
-add_action( 'wp_enqueue_scripts', 'wpbf_scripts', 10 );
-
-// Init
-require_once( WPBF_THEME_DIR . '/inc/init.php' );
-
-}
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
+require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';

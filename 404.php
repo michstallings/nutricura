@@ -1,18 +1,35 @@
 <?php
 /**
- * 404 Page
+ * The template for displaying 404 pages (not found).
  *
- * Displayed if a page couldn't be found.
- * See also inc/template-parts/404.php
+ * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package Page Builder Framework
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
-get_header();
+get_header(); ?>
 
-do_action( 'wpbf_404' );
+<?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
 
-get_footer();
+	<?php get_sidebar(); ?>
+
+<?php endif ?>
+
+	<div id="primary" <?php astra_primary_class(); ?>>
+
+		<?php astra_primary_content_top(); ?>
+
+		<?php astra_404_content_template(); ?>		
+
+		<?php astra_primary_content_bottom(); ?>
+
+	</div><!-- #primary -->
+
+<?php if ( astra_page_layout() == 'right-sidebar' ) : ?>
+
+	<?php get_sidebar(); ?>
+
+<?php endif ?>
+
+<?php get_footer(); ?>

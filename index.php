@@ -1,73 +1,42 @@
 <?php
 /**
- * Index
+ * The main template file.
  *
- * @package Nutricura - Page Builder Framework
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Astra
+ * @since 1.0.0
  */
- 
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
 
-$grid_gap = get_theme_mod( 'sidebar_gap', 'medium' );
+get_header(); ?>
 
-get_header();
+<?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
 
-?>
+	<?php get_sidebar(); ?>
 
-		<div id="content">
+<?php endif ?>
 
-			<?php do_action( 'wpbf_content_open' ); ?>
+	<div id="primary" <?php astra_primary_class(); ?>>
 
-			<?php wpbf_inner_content(); ?>
+		<?php astra_primary_content_top(); ?>
 
-				<?php do_action( 'wpbf_inner_content_open' ); ?>
+		<?php astra_content_loop(); ?>
 
-				<div class="wpbf-grid wpbf-main-grid wpbf-grid-<?php echo esc_attr( $grid_gap ); ?>">
+		<?php astra_pagination(); ?>
 
-					<?php do_action( 'wpbf_sidebar_left' ); ?>
+		<?php astra_primary_content_bottom(); ?>
 
-					<main id="main" class="wpbf-main wpbf-medium-2-3<?php echo wpbf_archive_class(); // WPCS: XSS ok. ?>">
+	</div><!-- #primary -->
 
-						<?php do_action( 'wpbf_main_content_open' ); ?>
+<?php if ( astra_page_layout() == 'right-sidebar' ) : ?>
 
-						<?php if( have_posts() ) : ?>
+	<?php get_sidebar(); ?>
 
-						<?php do_action( 'wpbf_before_loop' ); ?>
-
-						<?php while ( have_posts() ) : the_post(); ?>
-
-						<?php get_template_part( 'inc/template-parts/article' ); ?>
-
-						<?php endwhile; ?>
-
-						<?php do_action( 'wpbf_after_loop' ); ?>
-
-						<?php else : ?>
-
-						<?php get_template_part( 'inc/template-parts/article-none' ); ?>
-
-						<?php endif; ?>
-
-						<?php the_posts_pagination( array(
-							'mid_size'  => 2,
-							'prev_text' => __( '&larr; Previous', 'page-builder-framework' ),
-							'next_text' => __( 'Next &rarr;', 'page-builder-framework' ),
-						) ); ?>
-
-						<?php do_action( 'wpbf_main_content_close' ); ?>
-
-					</main>
-
-					<?php do_action( 'wpbf_sidebar_right' ); ?>
-
-				</div>
-
-				<?php do_action( 'wpbf_inner_content_close' ); ?>
-
-			<?php wpbf_inner_content_close(); ?>
-
-			<?php do_action( 'wpbf_content_close' ); ?>
-			
-		</div>
+<?php endif ?>
 
 <?php get_footer(); ?>
