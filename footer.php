@@ -7,7 +7,7 @@
  */
  
 // exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+/*if ( ! defined( 'ABSPATH' ) ) exit;
 
 		do_action( 'wpbf_before_footer' );
 
@@ -17,12 +17,39 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		?>
 
-	</div>
+	</div> 
 
-<?php do_action( 'wpbf_body_close' ); ?>
+<?php do_action( 'wpbf_body_close' ); ?> */ ?>
 
-<?php wp_footer(); ?>
+<footer>
+		<div class="container" id="footer">
+			<div class="row">
+				<div class="one-third column">
+					<?php wp_nav_menu(array(
+			              'theme_location' => 'footer-menu',
+			              'container-class' => 'menu-footer'
+			)); ?>
+				</div>
+				<div>
+					<?php dynamic_sidebar('left-footer'); ?>
+				</div>
 
-</body>
+				<div>
+					<?php dynamic_sidebar('center-left-footer'); ?>
+				</div>
 
+				<div>
+					<?php dynamic_sidebar('center-right-footer'); ?>
+				</div>
+
+				<div>
+					<?php dynamic_sidebar('right-footer'); ?>
+				</div>
+			</div> <!--Row close -->
+		</div> <!--Container close-->
+
+	</footer>
+
+	<?php wp_footer(); ?>
+  </body>
 </html>

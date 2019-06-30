@@ -146,3 +146,50 @@ add_action( 'wp_enqueue_scripts', 'wpbf_scripts', 10 );
 
 // Init
 require_once( WPBF_THEME_DIR . '/inc/init.php' );
+
+//Widgets
+//Left footer widget
+	register_sidebar( array(
+		'name'          => ('Left Footer'),
+		'id'            => 'left-footer',
+		'description'   => 'Left widget area in the footer',
+		'before_widget' => '<div class="widget-footer widget-left>"',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title>"',
+		'after_title'   => '</h3>',
+
+	));
+//Center left footer widget area
+	register_sidebar( array(
+		'name'          => ('Center Left Footer'),
+		'id'            => 'center-left-footer',
+		'description'   => 'Center left widget area in the footer',
+		'before_widget' => '<div class="widget-footer widget-center>"',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title>"',
+		'after_title'   => '</h3>',
+
+	));
+//Center right footer widget area
+	register_sidebar( array(
+		'name'          => ('Center Right Footer'),
+		'id'            => 'center-right-footer',
+		'description'   => 'Center right widget area in the footer',
+		'before_widget' => '<div class="widget-footer widget-center>"',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title>"',
+		'after_title'   => '</h3>',
+
+	));
+//Right footer widget area
+	register_sidebar( array(
+		'name'          =>('Right Footer'),
+		'id'            => 'right-footer',
+		'description'   => 'right widget area in the footer',
+		'before_widget' => '<div class="widget-footer widget-right>"',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title>"',
+		'after_title'   => '</h3>',
+
+	));
+}
